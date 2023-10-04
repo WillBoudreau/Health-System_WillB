@@ -8,20 +8,21 @@ namespace Health_System_WillB
 {
     internal class Program
     {
-        //int variables 
-        int lives;
-        int xp;
-        int level;
-        //float variables
-        float health = 100f;
-        float shield;
-        float healthUp;
-        float shieldUp;
-        float damage;
-
-        static void Main()
-        {
-            health = 100;
+       
+         static void Main(string[] args)
+        { 
+            //int variables 
+            int lives;
+            int xp;
+            int level;
+            //float variables
+            float health = 100f;
+            float shield;
+            float healthUp;
+            float shieldUp;
+            float damage;
+           
+            // Introduction
             Console.WriteLine("From Will's Studio");
             Console.WriteLine("------------------");
             Console.ReadKey();
@@ -35,12 +36,10 @@ namespace Health_System_WillB
             Console.WriteLine("Hello! " + username);
             Console.WriteLine("Press any key to begin (NOT ALT + F4 or ESC)");
             Console.ReadKey();
-            ShowHUD();
         }
-         
-        void ShowHUD()
+        static void Level_selec()
         {
-            Console.WriteLine("You have " + health + "health");
+            Console.WriteLine();
         }
     }
 }
