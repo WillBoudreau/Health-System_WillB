@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
@@ -32,6 +33,7 @@ namespace Health_System_WillB
             attack = 25;
             monsterhealth = 100;
             scoremultiplyer = 2.5f;
+            damage = 10;
             Console.WriteLine("From Will's Studio");
             Console.WriteLine("------------------");
             Console.ReadKey();
@@ -40,9 +42,6 @@ namespace Health_System_WillB
             Console.ReadKey();
             Console.WriteLine("Cave Explorers");
             Console.WriteLine("--------------");
-            Console.WriteLine("Enter you name here: ");
-            username = Console.ReadLine();
-            Console.WriteLine("Hello! " + username);
             Console.WriteLine("Press any key to begin (NOT ALT + F4 or ESC)");
             Console.ReadKey();
             ShowHUD();
@@ -59,11 +58,10 @@ namespace Health_System_WillB
             Console.WriteLine("You have " + xp + " xp");
             Console.WriteLine("-------------------------------");
             Console.ReadKey();
-            Monster();
+            MonsterEasy();
         }
-        static void Damage(float damage)
+        static void TakeDamage(float damage)
         {
-            damage = 10;
             if (monsterhealth < 50)
             {
                 damage += 10;
@@ -81,8 +79,15 @@ namespace Health_System_WillB
                 health -= damage;
                 if ( health <= 0 ) 
                 {
-                    Console.WriteLine("You lose");
+                    Console.WriteLine("You lose, try again");
                     health = 0;
+                    lives -= 1;
+                    if ( lives <= 0)
+                    {
+                        lives = 0;
+                        Console.WriteLine("You lose, for real this time");
+
+                    }
                 }
                 if ( health >0 && health < 10) 
                 {
@@ -136,10 +141,11 @@ namespace Health_System_WillB
                 }
             }
         }
-        static void Monster()
+        static void MonsterEasy()
         {
             Console.WriteLine("You are attacked by a monster!");
-            Damage(damage);
+            TakeDamage(damage);
+            Console.WriteLine("You take " + damage + " damage");
             Console.WriteLine("You fight back! with " + attack + " Attack");
             monsterhealth -= attack;
             Console.WriteLine("Monster health is at " + monsterhealth);
@@ -147,16 +153,24 @@ namespace Health_System_WillB
             if (monsterhealth <= 0)
             {
                 monsterhealth = 0;
-                xp = xp * scoremultiplyer;
+                xp += 10;
                 Console.WriteLine("You win!");
                 Console.WriteLine("You get " + xp + "xp");
             }
             ShowHUD();
         }
+        static void MonsterMed()
+        {
+
+        }
+        static void LevelUP(int level)
+        {
+
+        }
         static void Mission()
         {
                 ShowHUD();
-                Monster();
+                MonsterEasy();
         }
         
          
