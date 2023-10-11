@@ -11,28 +11,15 @@ namespace Health_System_WillB
     internal class Program
     {
         //int variables 
-        static int lives;
-        static int xp;
-        static int level;
-        //float variables
-        static float health;
-        static float shield;
-        static float healthUp;
-        static float shieldUp;
-        static float damage;
-        static float attack;
-        static float monsterhealth;
-        static float scoremultiplyer;
+        static int lives, xp, health, shield, attack, level, monsterhealth, scoremultiplyer, damage, bossDamage, heal, score;
+        // string variables
+        static string healthStatus;
         static void Main(string[] args)
         {
-            health = 100f;
-            lives = 3;
-            xp = 0;
-            shield = 100f;
-            level = 0;
+            Revive();
             attack = 25;
             monsterhealth = 100;
-            scoremultiplyer = 2.5f;
+            scoremultiplyer = 2;
             damage = 10;
             Console.WriteLine("From Will's Studio");
             Console.WriteLine("------------------");
@@ -56,11 +43,12 @@ namespace Health_System_WillB
             Console.WriteLine("You have " + lives + " lives");
             Console.WriteLine("You are at Level " + level);
             Console.WriteLine("You have " + xp + " xp");
+            Console.WriteLine("You have " + score + " score");
             Console.WriteLine("-------------------------------");
             Console.ReadKey();
-            MonsterEasy();
+            Monster();
         }
-        static void TakeDamage(float damage)
+        static void TakeDamage(int damage)
         {
             if (monsterhealth < 50)
             {
@@ -141,7 +129,7 @@ namespace Health_System_WillB
                 }
             }
         }
-        static void MonsterEasy()
+        static void Monster()
         {
             Console.WriteLine("You are attacked by a monster!");
             TakeDamage(damage);
@@ -154,14 +142,18 @@ namespace Health_System_WillB
             {
                 monsterhealth = 0;
                 xp += 10;
+                score += 100;
                 Console.WriteLine("You win!");
                 Console.WriteLine("You get " + xp + "xp");
             }
             ShowHUD();
         }
-        static void MonsterMed()
+        static void MonsterBoss()
         {
-
+            Console.WriteLine("Thud thud thud");
+            Console.WriteLine("You have encountered a boss!");
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("The boss deals " + bossDamage);
         }
         static void LevelUP(int level)
         {
@@ -170,11 +162,21 @@ namespace Health_System_WillB
         static void Mission()
         {
                 ShowHUD();
-                MonsterEasy();
+                Monster();
+        }
+        static void Heal(int heal)
+        {
+
+        }
+        static void Revive() 
+        {
+            health = 100;
+            lives = 3;
+            xp = 0;
+            shield = 100;
+            level = 0;
         }
         
          
     }
-  
 }
-
