@@ -13,9 +13,10 @@ namespace Health_System_WillB
     {
 
         //int variables 
-        static int lives = 3;
-        static int health = 100;
-        static int shield =10;
+        static int lives;
+        static int health;
+        static int shield;
+        static int shieldUP;
         static int level;
         static int xp;
         static int damage;
@@ -41,9 +42,20 @@ namespace Health_System_WillB
             Console.WriteLine("Press any key to begin (NOT ALT + F4 or ESC)");
             Console.ReadKey();
             ShowHUD();
-            TakeDamage(60);
+            TakeDamage(10);
             ShowHUD();
-           
+            TakeDamage(50);
+            ShowHUD();
+            TakeDamage(10);
+            ShowHUD();
+            TakeDamage(25);
+            ShowHUD();
+            TakeDamage(110);
+            ShowHUD();
+            TakeDamage(-10);
+            ShowHUD();
+            RegenerateShield(10);
+            ShowHUD();
 
         }
          
@@ -66,79 +78,80 @@ namespace Health_System_WillB
                 damage = 0;
             }
             Console.WriteLine("You are attacked by a monster!");
-            if( shield  > 0 ) 
+            if (shield > 0)
             {
+                Console.WriteLine(damage);
                 shield -= damage;
-                if( shield <= 0)
+                if (damage >= shield)
                 {
                     shield = 0;
-                    if (damage > shield)
-                    {
-                        health -= damage;
-                    }
+                    health += shield;
                 }
             }
-            else
+            if(shield <= 0) 
             {
                 health -= damage;
-                if ( health < 0 ) 
-                {  
-                    health = 0;
-                    Console.WriteLine("You lose, try again");
-                  
-                }
-                
-                if ( health >0 && health < 10) 
-                {
-                    Console.WriteLine("Health Critical!");
-                    
-                }
-                if (health >= 10 && health < 20)
-                {
-                    Console.WriteLine("Health really low!");
-                    
-                }
-                if (health >= 20 && health < 30)
-                {
-                    Console.WriteLine("Health low");
-                    
-                }
-                if (health >= 30 && health < 40) 
-                {
-                    Console.WriteLine("Health getting low");
-                    
-                }
-                if (health >= 40 && health < 50)
-                {
-                    Console.WriteLine("Healh mid");
-                   
-                }
-                if (health >= 50 && health < 60)
-                {
-                    Console.WriteLine("Health not bad");
-                    
-                }
-                if (health >= 60 &&  health < 70)
-                {
-                    Console.WriteLine("Health okay");
-                    
-                }
-                if (health >= 70 && health < 80)
-                {
-                    Console.WriteLine("Health Good");
-                    
-                }
-                if (health >= 80 && health < 90)
-                {
-                    Console.WriteLine("Health Great!");
-                    
-                }
-                if (health >= 90 && health <= 100)
-                {
-                    Console.WriteLine("Health Awesome!");
-                   
-                }
+
+                    if (health <= 0)
+                    {
+                        health = 0;
+                        Console.WriteLine("You lose, try again");
+                        Revive();
+
+                    }
+
+                    if (health > 0 && health < 10)
+                    {
+                        Console.WriteLine("Health Critical!");
+
+                    }
+                    if (health >= 10 && health < 20)
+                    {
+                        Console.WriteLine("Health really low!");
+
+                    }
+                    if (health >= 20 && health < 30)
+                    {
+                        Console.WriteLine("Health low");
+
+                    }
+                    if (health >= 30 && health < 40)
+                    {
+                        Console.WriteLine("Health getting low");
+
+                    }
+                    if (health >= 40 && health < 50)
+                    {
+                        Console.WriteLine("Healh mid");
+
+                    }
+                    if (health >= 50 && health < 60)
+                    {
+                        Console.WriteLine("Health not bad");
+
+                    }
+                    if (health >= 60 && health < 70)
+                    {
+                        Console.WriteLine("Health okay");
+
+                    }
+                    if (health >= 70 && health < 80)
+                    {
+                        Console.WriteLine("Health Good");
+
+                    }
+                    if (health >= 80 && health < 90)
+                    {
+                        Console.WriteLine("Health Great!");
+
+                    }
+                    if (health >= 90 && health <= 100)
+                    {
+                        Console.WriteLine("Health Awesome!");
+
+                    }
             }
+            
         }
         static void IncreaseXP(int xp)
         {
@@ -162,16 +175,26 @@ namespace Health_System_WillB
             }
             Console.WriteLine("You heal " + heal + " heal");
             health += heal;
-            if (health > 100)
+            if (health >= 100)
             {
                 health = 100;
             }
             
         }
-        static void RegenerateShield( int shield)
+        static void RegenerateShield( int shieldUP)
         {
-            Console.WriteLine("Your shield regenarates");
-            Console.WriteLine("Plus" + shield + " Shield");
+
+            if (shieldUP <= 0)
+            {
+                shieldUP = 0;
+                Console.WriteLine("You cannot negatively raise you shield...");
+            }
+            Console.WriteLine("You get " + shieldUP + "Shield")
+            shield += shieldUP;
+            if (health >= 100)
+            {
+                health = 100;
+            }
         }
         static void Revive() 
         {
@@ -183,23 +206,6 @@ namespace Health_System_WillB
             if (lives < 0)
             {
                 Console.WriteLine("You lose");
-            }
-        }
-        static void Playerattack()
-        {
-            Console.WriteLine("You fight back! with " + attack + " Attack");
-            monsterhealth -= attack;
-            Console.WriteLine("Monster health is at " + monsterhealth);
-            Console.ReadKey();
-            if (monsterhealth <= 0)
-            {
-                monsterhealth = 0;
-                Console.WriteLine("You win!");
-                Console.WriteLine("You get " + xp + "xp");
-            }
-            if (monsterhealth < 50)
-            {
-                damage += 10;
             }
         }
         static void UnitTestHealthSystem()
