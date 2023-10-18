@@ -77,7 +77,7 @@ namespace Health_System_WillB
             if (shield > 0)
             {
                 shield -= damage;
-                if (shield <= 0)
+                else if (shield <= 0)
                 {
                     shield -= damage;
                     Console.WriteLine(damage);
