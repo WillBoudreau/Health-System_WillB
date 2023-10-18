@@ -13,21 +13,20 @@ namespace Health_System_WillB
     {
 
         //int variables 
-        static int lives;
-        static int health;
-        static int shield;
+        static int lives = 3;
+        static int health = 100;
+        static int shield = 100;
         static int shieldUP;
         static int level;
         static int xp;
         static int damage;
         static int xpmax;
-        static int attack;
         static int monsterhealth;
         // string variables
         static string healthStatus;
         static void Main(string[] args)
         {
-            //UnitTestHealthSystem();
+            UnitTestHealthSystem();
             //UnitTestXPSystem();
 
             
@@ -41,22 +40,18 @@ namespace Health_System_WillB
             Console.WriteLine("--------------");
             Console.WriteLine("Press any key to begin (NOT ALT + F4 or ESC)");
             Console.ReadKey();
+            lives = 3;
+            health = 100;
+            shield = 100;
             ShowHUD();
             TakeDamage(10);
             ShowHUD();
+            lives = 3;
+            health = 100;
+            shield = 10;
             TakeDamage(50);
             ShowHUD();
             TakeDamage(10);
-            ShowHUD();
-            TakeDamage(25);
-            ShowHUD();
-            TakeDamage(110);
-            ShowHUD();
-            TakeDamage(-10);
-            ShowHUD();
-            RegenerateShield(10);
-            ShowHUD();
-
         }
          
         static void ShowHUD()
@@ -72,24 +67,21 @@ namespace Health_System_WillB
         }
         static void TakeDamage(int damage)
         {
+            Console.WriteLine("You are attacked by a monster!");
             if (damage < 0)
             {
                 Console.WriteLine("Cannot do negative damage");
                 damage = 0;
             }
-            Console.WriteLine("You are attacked by a monster!");
             if (shield > 0)
             {
-                Console.WriteLine(damage);
                 shield -= damage;
-                if (damage >= shield)
-                {
-                    shield = 0;
-                    health += shield;
-                }
             }
-            if(shield <= 0) 
+            if (shield <= 0)
             {
+                damage += shield;
+                Console.WriteLine(damage);
+                shield = 0;
                 health -= damage;
 
                     if (health <= 0)
@@ -150,6 +142,7 @@ namespace Health_System_WillB
                         Console.WriteLine("Health Awesome!");
 
                     }
+                
             }
             
         }
@@ -182,18 +175,18 @@ namespace Health_System_WillB
             
         }
         static void RegenerateShield( int shieldUP)
-        {
+        {   
+            Console.WriteLine("You get " + shieldUP + "Shield");
+            shield += shieldUP;
+            if (shield > 100)
+            {
+                shield = 100;
+            }
 
             if (shieldUP <= 0)
             {
                 shieldUP = 0;
                 Console.WriteLine("You cannot negatively raise you shield...");
-            }
-            Console.WriteLine("You get " + shieldUP + "Shield")
-            shield += shieldUP;
-            if (health >= 100)
-            {
-                health = 100;
             }
         }
         static void Revive() 
