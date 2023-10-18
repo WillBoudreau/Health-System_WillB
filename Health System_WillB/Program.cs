@@ -13,9 +13,9 @@ namespace Health_System_WillB
     {
 
         //int variables 
-        static int lives = 3;
-        static int health = 100;
-        static int shield = 100;
+        static int lives;
+        static int health;
+        static int shield;
         static int shieldUP;
         static int level;
         static int xp;
@@ -26,7 +26,7 @@ namespace Health_System_WillB
         static string healthStatus;
         static void Main(string[] args)
         {
-            UnitTestHealthSystem();
+            //UnitTestHealthSystem();
             //UnitTestXPSystem();
 
             
@@ -49,6 +49,7 @@ namespace Health_System_WillB
             lives = 3;
             health = 100;
             shield = 10;
+            ShowHUD();
             TakeDamage(50);
             ShowHUD();
             TakeDamage(10);
@@ -76,13 +77,12 @@ namespace Health_System_WillB
             if (shield > 0)
             {
                 shield -= damage;
-            }
-            if (shield <= 0)
-            {
-                damage += shield;
-                Console.WriteLine(damage);
-                shield = 0;
-                health -= damage;
+                if (shield <= 0)
+                {
+                    shield -= damage;
+                    Console.WriteLine(damage);
+                    health += shield;
+                    shield = 0;
 
                     if (health <= 0)
                     {
@@ -142,7 +142,8 @@ namespace Health_System_WillB
                         Console.WriteLine("Health Awesome!");
 
                     }
-                
+                }
+
             }
             
         }
