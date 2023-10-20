@@ -26,7 +26,7 @@ namespace Health_System_WillB
         static void Main(string[] args)
         {
             UnitTestHealthSystem();
-            //UnitTestXPSystem();
+            UnitTestXPSystem();
 
             
             Console.WriteLine("From Will's Studio");
@@ -81,7 +81,22 @@ namespace Health_System_WillB
             ShowHUD();
             RegenerateShield(10);
             ShowHUD();
-
+            shield = 0;
+            health = 0;
+            lives = 2;
+            ShowHUD();
+            Revive();
+            ShowHUD();
+            xp = 0;
+            level = 0;
+            ShowHUD();
+            IncreaseXP(200);
+            ShowHUD();
+            xp = 0;
+            level = 2;
+            ShowHUD();
+            IncreaseXP(210);
+            ShowHUD();
         }
          
         static void ShowHUD()
@@ -113,7 +128,6 @@ namespace Health_System_WillB
                     health = health + shield;
                     
                     shield = 0;
-                    Console.WriteLine(shield);
 
                     if (health <= 0)
                     {
@@ -182,18 +196,21 @@ namespace Health_System_WillB
             }
             
         }
-        static void IncreaseXP(int xp)
+        static void IncreaseXP(int exp)
         {
-            xpmax = 100;
-           Console.WriteLine("You get " + xp + "xp");
-           while( xp < xpmax)
-            {
-                if( xp == xpmax)
-                {
-                    level += 1;
-                    xpmax += 100;
-                }
+            
+            Console.WriteLine("You get " + exp + "xp");
+            xp = exp;
+            if( xp >= xpmax)
+                
+            { 
+                xp = xp - xpmax;
+                
+                xpmax = 100;
+                level += 1;
+                xpmax += 100;
             }
+            
         }
         static void Heal(int heal)
         {
@@ -214,14 +231,14 @@ namespace Health_System_WillB
         {   
             Console.WriteLine("You get " + shieldUP + "Shield");
            
-            if (shieldUP < 0)
+            if (shieldUP <= 0)
             { 
                 shieldUP = 0;
                 Console.WriteLine("You cannot negatively raise you shield...");
                
             } 
             shield += shieldUP;
-            if (shield > 100)
+            if (shield >= 100)
             {
                 shield = 100;
             } 
