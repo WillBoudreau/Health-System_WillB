@@ -25,8 +25,8 @@ namespace Health_System_WillB
         static string healthStatus;
         static void Main(string[] args)
         {
-            UnitTestHealthSystem();
-            UnitTestXPSystem();
+          //UnitTestHealthSystem();
+          //UnitTestXPSystem();
 
             
             Console.WriteLine("From Will's Studio");
@@ -73,7 +73,25 @@ namespace Health_System_WillB
             health = 50;
             lives = 3;
             ShowHUD();
+            TakeDamage(-10);
+            ShowHUD(); 
+            shield = 50;
+            health = 50;
+            lives = 3;
+            ShowHUD();
             RegenerateShield(-10);
+            ShowHUD();
+            shield = 0;
+            health = 90;
+            lives = 3;
+            ShowHUD();
+            Heal(5);
+            ShowHUD();
+            shield = 0;
+            health = 90;
+            lives = 3;
+            ShowHUD();
+            Heal(-5);
             ShowHUD();
             shield = 100;
             health = 100;
@@ -88,15 +106,26 @@ namespace Health_System_WillB
             Revive();
             ShowHUD();
             xp = 0;
-            level = 0;
+            level = 1;
             ShowHUD();
-            IncreaseXP(200);
+            IncreaseXP(10);
+            ShowHUD();
+            xp = 0;
+            level = 1;
+            ShowHUD();
+            IncreaseXP(105);
             ShowHUD();
             xp = 0;
             level = 2;
             ShowHUD();
             IncreaseXP(210);
             ShowHUD();
+            xp = 0;
+            level = 3;
+            ShowHUD();
+            IncreaseXP(315);
+            ShowHUD();
+
         }
          
         static void ShowHUD()
@@ -113,6 +142,7 @@ namespace Health_System_WillB
         static void TakeDamage(int damage)
         {
             Console.WriteLine("You are attacked by a monster!");
+            Console.WriteLine("You are about to take " + damage + " Damage");
             if (damage < 0)
             {
                 Console.WriteLine("Cannot do negative damage");
@@ -132,64 +162,93 @@ namespace Health_System_WillB
                     if (health <= 0)
                     {
                         health = 0;
-                        Console.WriteLine("You lose, try again");
-
+                        Console.WriteLine("---------------------");
+                        healthStatus = ("You lose, try again");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("---------------------");
                     }
 
                     if (health > 0 && health < 10)
                     {
-                        Console.WriteLine("Health Critical!");
-
+                        Console.WriteLine("----------------------");
+                        healthStatus = ("Health Critical!");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("-----------------------");
                     }
                     if (health >= 10 && health < 20)
                     {
-                        Console.WriteLine("Health really low!");
-
+                        Console.WriteLine("-----------------------");
+                        healthStatus = ("Health really low!");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("------------------------");
                     }
                     if (health >= 20 && health < 30)
                     {
-                        Console.WriteLine("Health low");
+                        Console.WriteLine("-------------------------");
+                        healthStatus = ("Health low");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("-------------------------");
 
                     }
                     if (health >= 30 && health < 40)
                     {
-                        Console.WriteLine("Health getting low");
-
+                        Console.WriteLine("--------------------------");
+                        healthStatus = ("Health getting low");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("--------------------------");
                     }
                     if (health >= 40 && health < 50)
                     {
-                        Console.WriteLine("Healh mid");
+                        Console.WriteLine("---------------------------");
+                        healthStatus = ("Healh mid");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("---------------------------");
 
                     }
                     if (health >= 50 && health < 60)
                     {
-                        Console.WriteLine("Health not bad");
+                        Console.WriteLine("---------------------------");
+                        healthStatus = ("Health not bad");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("---------------------------");
 
                     }
                     if (health >= 60 && health < 70)
                     {
-                        Console.WriteLine("Health okay");
+                        Console.WriteLine("----------------------------");
+                        healthStatus = ("Health okay");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("-----------------------------");
 
                     }
                     if (health >= 70 && health < 80)
                     {
-                        Console.WriteLine("Health Good");
-
+                        Console.WriteLine("------------------------------");
+                        healthStatus = ("Health good");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("-------------------------------");
                     }
                     if (health >= 80 && health < 90)
                     {
-                        Console.WriteLine("Health Great!");
-
+                        Console.WriteLine("--------------------------------");
+                        healthStatus = ("Health great");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("---------------------------------");
                     }
                     if (health >= 90 && health <= 100)
                     {
-                        Console.WriteLine("Health Awesome!");
+                        Console.WriteLine("--------------------------------");
+                        healthStatus = ("Health awesome!");
+                        Console.WriteLine(healthStatus);
+                        Console.WriteLine("---------------------------------");
 
                     }
                     if(health > 100)
                     {
+                        Console.WriteLine("------------------------------------");
                         Console.WriteLine("Error, health over max: 100. Not possible at this time.");
                         health = 100;
+                        Console.WriteLine("-------------------------------------");
                     }
                 }
 
@@ -200,17 +259,19 @@ namespace Health_System_WillB
         {
             
             Console.WriteLine("You get " + exp + "xp");
-            xp = exp;
-            if( xp >= xpmax)
-                
-            { 
+            xpmax = 100;
+            xp = xp + exp;
+            while (xp >= xpmax)
+            {
                 xp = xp - xpmax;
-                
-                xpmax = 100;
                 level += 1;
                 xpmax += 100;
+                if (level > 99)
+                {
+                    Console.WriteLine("Error max level reached, 99 is the max level for the player");
+                    level = 99;
+                }
             }
-            
         }
         static void Heal(int heal)
         {
