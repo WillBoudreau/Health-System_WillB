@@ -25,8 +25,8 @@ namespace Health_System_WillB
         static string healthStatus;
         static void Main(string[] args)
         {
-          //UnitTestHealthSystem();
-          //UnitTestXPSystem();
+          UnitTestHealthSystem();
+          UnitTestXPSystem();
 
             
             Console.WriteLine("From Will's Studio");
